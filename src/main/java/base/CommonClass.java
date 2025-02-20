@@ -23,7 +23,7 @@ public class CommonClass {
 
         try{
             properties = new Properties();
-            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\tareq\\IdeaProjects\\SeleniumTestNGAutomation\\src\\main\\java\\config\\secret.properties");
+            FileInputStream fileInputStream = new FileInputStream("/Users/tareqhasan/IdeaProjects/PBAutomationFramework/src/main/java/config/secret.properties");
             properties.load(fileInputStream);
         }catch (FileNotFoundException e){
             e.printStackTrace();

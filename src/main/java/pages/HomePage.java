@@ -14,6 +14,17 @@ public class HomePage extends CommonClass {
     @FindBy(xpath = "//a[contains(text(),'Register')]")
     WebElement register;
 
+    @FindBy(xpath = "//input[@name='username']")
+    WebElement userName;
+
+    @FindBy(xpath = "//input[@name='password']")
+    WebElement passWord;
+
+    @FindBy(xpath = "//input[@type='submit']")
+    WebElement logIn;
+
+    @FindBy(xpath = "//a[contains(text(),'Forgot login info?')]")
+    WebElement forgotLoginInfoElement;
 
 
     //Initializing the Page Objects
@@ -22,15 +33,21 @@ public class HomePage extends CommonClass {
     }
 
     //Actions
-    public RegistrationPage registerLink() throws InterruptedException {
+    public RegistrationPage registerLink() {
         register.click();
-        Thread.sleep(4000);
         return new RegistrationPage();
-
     }
 
+    public LandingPage logAction(String un, String ps) throws InterruptedException {
+        userName.sendKeys(un);
+        passWord.sendKeys(ps);
+        logIn.click();
+        Thread.sleep(2000);
+        return new LandingPage();
+    }
 
-
-
-
+    public ForgotLoginInfo forgotLoginInformation() {
+        forgotLoginInfoElement.click();
+        return new ForgotLoginInfo();
+    }
 }

@@ -2,9 +2,13 @@ package tests;
 
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.RegistrationPage;
+import utility.TestUtil;
+
+import java.io.IOException;
 
 public class RegistrationPageTest extends RegistrationPage {
 
@@ -16,14 +20,20 @@ public class RegistrationPageTest extends RegistrationPage {
 //    }
 
     @BeforeMethod
-    public void initialize() throws InterruptedException {
+    public void initialize() {
         registrationPage = PageFactory.initElements(driver, RegistrationPage.class);
         homePage = new HomePage();
         homePage.registerLink();
     }
 
-    @Test
-    public void registrationProcessTest(){
-        registrationPage.registrationProcess();
+    @DataProvider(name = "registrationdata")
+    public static Object[][] getRegistrationTestData() throws IOException {
+        Object[][] logInData = TestUtil.getTestData("register");
+        return logInData;
+    }
+
+    @Test(dataProvider = "registrationdata")
+    public void registrationProcessTest(String myFirstName, String myLastName, String myUserName, String myPassword, String myConfirmPassword){
+        registrationPage.registrationProcess(myFirstName, myLastName, myUserName, myPassword, myConfirmPassword);
     }
 }
